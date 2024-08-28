@@ -91,17 +91,7 @@
     </dependency>
     
     <!-- Other dependencies -->
-    <dependency>
-    	<groupId>in.srinivasit</groupId>
-    	<artifactId>01_SB_MVC_Councellors_App</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-    	<groupId>in.srinivasit</groupId>
-    	<artifactId>01_SB_Logging_App</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
-	</dependencies>
+   </dependencies>
 	
 	<build>
 		<plugins>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+  <div class="container">
+  <a class="btn btn-primary" href="dashboard" role="button">DashBoard</a>
+		<a class="btn btn-primary" href="enq" role="button">AddEnquiry</a> 
+		<a class="btn btn-primary" href="logout" role="button">Logout</a>
+		<hr />
+  <h1>View Form Here</h1>
+  <form th:action="@{/filter-enqs}" th:object="${viewEnqFilterRequest}" method="post">
+  <table>
+  <tr>
+  <td>
+  ClassMode:
+  <select th:field="*{classMode}">
+						<option value="">-select-</option>
+						<option value="Online">Online</option>
+						<option value="ClassRoom">ClassRoom</option>
+					</select>
+  </td>
+  <td>
+  Course :
+  <select th:field="*{courseName}" >
+							<option value="">-select-</option>
+							<option value="Java">Java</option>
+							<option value="Phython">Phython</option>
+							<option value="AWS">AWS</option>
+							<option value="DotNet">DotNet</option>
+					</select>
+  </td>
+  <td>
+  Status:
+  <select th:field="*{enqStatus}">
+							<option value="">-select-</option>
+							<option value="Open">Open</option>
+							<option value="Enrolled">Enrolled</option>
+							<option value="Lost">Lost</option>
+					</select>
+  </td>
+  <td>
+  <input type="submit" value="Search" class = "btn btn-primary"> 
+  
+  </td>
+  </tr>
+  
+  </table>
+  </form>
+  
+  
+  <table class="table table-striped ">
+			<thead>
+				<tr class="table-dark">
+					<th>Sl.Number</th>
+					<th>StudentName</th>
+					<th>StudentContact</th>
+					<th>CourseName</th>
+					<th>ClassMode</th>
+					<th>EnquiryStatus</th>
+					<th>Edit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="enq,indexStart : ${enquiries}">
+					<td th:text="${indexStart.index+1}"></td>
+					<td th:text="${enq.studentName}"></td>
+					<td th:text="${enq.studentPhno}"></td>
+					<td th:text="${enq.courseName}"></td>
+					<td th:text="${enq.classMode}"></td>
+					<td th:text="${enq.enqStatus}"></td>
+					<td><a th:href="@{'/editEnq?enqId='+${enq.enqId}}">Edit</a></td>
+					</tr>
+					<tr th:if="${enquiries.size()==0}">
+					<td colspan="7">No Records Found</td>
+				</tr>
+			</tbody>
+		</table>
+  </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>

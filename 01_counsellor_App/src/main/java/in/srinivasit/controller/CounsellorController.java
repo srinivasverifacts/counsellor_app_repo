@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import in.srinivasit.dto.DashBoardResponse;
-import in.srinivasit.dto.DashboardResponse;
 import in.srinivasit.entity.Counsellor;
 import in.srinivasit.service.CounsellorService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -63,17 +62,19 @@ public class CounsellorController {
 			System.out.println("I am need to dash board logic is pending ");
 			
 		DashBoardResponse dbResponse=counsellorService.getDashBoardInfo(c.getCounsellorId());
-		model.addAttribute("DbResponse", dbResponse);
+		model.addAttribute("dbresponse", dbResponse);
 		return"dashboard";
 		
 		}
 	}
 	
 	@GetMapping("/dashboard")
-	public String dashboard(Model model) {
-		//Counsellor counsellorObj = new Counsellor();
-		//model.addAttribute("Counsellor", counsellorObj);
+	public String dashboard(HttpServletRequest request,Model model) {
+		HttpSession session=request.getSession(false);
+		Integer counsellorId = (Integer)session.getAttribute("counsellorId");
 		
+		DashBoardResponse dbResponse=counsellorService.getDashBoardInfo(counsellorId);
+		model.addAttribute("dbresponse", dbResponse);
 		return"dashboard";
 	}
 	
